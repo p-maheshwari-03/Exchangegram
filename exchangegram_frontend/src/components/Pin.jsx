@@ -108,18 +108,15 @@ const Pin = ({ pin }) => {
               )}
             </div>
             <div className=" flex justify-between items-center gap-2 w-full">
-              {destination?.slice(8).length > 0 ? (
-                <a
-                  href={destination}
-                  target="_blank"
+              {_id && (
+                <button
                   className="bg-white flex items-center gap-2 text-black font-bold p-2 pl-4 pr-4 rounded-full opacity-70 hover:opacity-100 hover:shadow-md"
-                  rel="noreferrer"
                 >
                   {' '}
                   <BsFillArrowUpRightCircleFill />
-                  {destination?.slice(8, 17)}...
-                </a>
-              ) : undefined}
+                  {destination?.slice(0, 5)}...
+                </button>
+              )}
               {postedBy?._id === user?.googleId && (
                 <button
                   type="button"
