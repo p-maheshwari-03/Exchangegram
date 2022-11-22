@@ -13,7 +13,7 @@ function App() {
     if (!user) {
       navigate('/login');
     }
-  }, []);
+  }, [navigate]);
 
   return (
     <Routes>

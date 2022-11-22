@@ -1,7 +1,6 @@
 import React from 'react';
-import GoogleLogin from 'react-google-login';
+import { GoogleLogin } from 'react-google-login';
 import { useNavigate } from 'react-router-dom';
-import { FcGoogle } from 'react-icons/fc';
 
 import { client } from '../client';
 import shareVideo from '../assets/share.mp4';
@@ -10,7 +9,7 @@ import logo from '../assets/logowhite.png';
 const Login = () => {
   const navigate = useNavigate();
 
-  const responseGoogle = (response) => {
+  const googleResponse = (response) => {
     localStorage.setItem('user', JSON.stringify(response.profileObj));
     const { name, googleId, imageUrl } = response.profileObj;
     const doc = {
@@ -45,20 +44,13 @@ const Login = () => {
           <div className="shadow-2x1">
             <GoogleLogin
               clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-              render={(renderProps) => (
-                <button
-                  type="button"
-                  className="bg-mainColor flex justify-center items-center p-3 rounded-lg cursor-pointer outline-none"
-                  onClick={renderProps.onClick}
-                  disabled={renderProps.disabled}
-                >
-                  <FcGoogle className="mr-4" />
-                  Sign in with Google
-                </button>
-              )}
-              onSuccess={responseGoogle}
-              onFailure={responseGoogle}
-              cookiePolicy="single_host_origin"
+              buttonText="Sign in with Google 🚀"
+              onSuccess={googleResponse}
+              onError={() => {
+                console.log('Login Failed');
+              }}
+              cookiePolicy={'single_host_origin'}
+              isSignedIn={true}
             />
           </div>
         </div>
